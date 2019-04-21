@@ -51,4 +51,4 @@ jobs:
       - run:
           name: run tests
           command: |
-            pipenv run pytest src/conduit
+            pipenv run pytest src
