@@ -24,7 +24,11 @@ jobs:
           name: Create testing db
           command: |
             sudo apt install postgresql-client
-            .docker/testdb.sh
+            psql -h localhost -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+              CREATE USER conduit_test WITH PASSWORD '';
+              CREATE DATABASE conduit_test;
+              GRANT ALL PRIVILEGES ON DATABASE conduit_test TO conduit_test;
+            EOSQL
             
       # Download and cache dependencies
       - restore_cache:
