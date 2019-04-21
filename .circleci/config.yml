@@ -11,18 +11,21 @@ jobs:
     environment:
       PIPENV_VENV_IN_PROJECT: 1
       PIPENV_IGNORE_VIRTUALENVS: 1
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: ""
     docker:
       - image: circleci/python:3.7.3
       - image: circleci/postgres:11.2-alpine
-        environment:
-          POSTGRES_USER: conduit_test
-          POSTGRES_DB: conduit_test
-          POSTGRES_PASSWORD: ""
-
-
     steps:
       - checkout
 
+      - run:
+          name: Create testing db
+          command: |
+            sudo apt install postgresql-client
+            .docker/testdb.sh
+            
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -41,18 +44,6 @@ jobs:
           paths:
             - ./.venv
           key: v1-dependencies-{{ checksum "Pipfile.lock" }}
-
-      - run:
-          name: Waiting for Postgres to be ready
-          command: |
-            for i in `seq 1 10`;
-            do
-              nc -z localhost 5432 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for Postgres && exit 1
-
       - run:
           name: run tests
           command: |
