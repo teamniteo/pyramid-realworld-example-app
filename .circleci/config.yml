@@ -69,10 +69,10 @@ jobs:
             .docker/devdb.sh
             .docker/testdb.sh
 
-      # - run:
-      #     name: run tests
-      #     command: |
-      #       make unit
+      - run:
+          name: run tests
+          command: |
+            make unit
 
       - run:
           name: run dev app
