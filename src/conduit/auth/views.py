@@ -33,6 +33,18 @@ class UserResponse(BaseModel):
         }
 
 
+@view_config(
+    route_name="user",
+    renderer="json",
+    request_method="GET",
+    openapi=True,
+    permission="authenticated",
+)
+def current_user(request: Request) -> UserResponse:
+    """User logs in."""
+    return UserResponse(user=User.by_id(request.authenticated_userid, db=request.db))
+
+
 @view_config(route_name="users", renderer="json", request_method="POST", openapi=True)
 def register(request: Request) -> UserResponse:
     """User registers to Conduit app."""
