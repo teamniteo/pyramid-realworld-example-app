@@ -63,6 +63,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserResponse"
+        "409":
+          description: User already exists error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericErrorModel"
         "422":
           description: Unexpected error
           content:

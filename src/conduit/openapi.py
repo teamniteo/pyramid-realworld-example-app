@@ -2,6 +2,7 @@
 
 from pyramid.config import Configurator
 from pyramid.httpexceptions import exception_response
+from pyramid.httpexceptions import HTTPConflict
 from pyramid.httpexceptions import HTTPNotFound
 from pyramid.httpexceptions import HTTPUnauthorized
 from pyramid.httpexceptions import HTTPUnprocessableEntity
@@ -42,6 +43,13 @@ def object_or_404(obj: t.Any) -> t.Any:
         raise HTTPNotFound
     else:
         return obj
+
+
+@exception_view_config(HTTPConflict)
+def conflict_error(exc: HTTPConflict, request: Request) -> HTTPConflict:
+    """Catch conflict errors due to duplicate entity found."""
+    logger.exception("Conflict error", exc_info=exc)
+    return exception_response(409, json_body={"errors": {"body": [exc.detail]}})
 
 
 @exception_view_config(Exception)
