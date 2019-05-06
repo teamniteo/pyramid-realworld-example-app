@@ -24,8 +24,10 @@ TAG_FOO_ID = "aaaaaaaa-bbbb-4ccc-aaaa-eeeeeeeeeee0"
 TAG_BAR_ID = "aaaaaaaa-bbbb-4ccc-aaaa-eeeeeeeeeee1"
 USER_ONE_ID = "aaaaaaaa-bbbb-4ccc-aaaa-eeeeeeeeeee1"
 USER_TWO_ID = "aaaaaaaa-bbbb-4ccc-aaaa-eeeeeeeeeee2"
+USER_JOHNJACOB_ID = "aaaaaaaa-bbbb-4ccc-aaaa-eeeeeeeeeee3"
 ARTICLE_FOO_ID = "aaaaaaaa-bbbb-4ccc-aaaa-eeeeeeeeeee1"
 ARTICLE_BAR_ID = "aaaaaaaa-bbbb-4ccc-aaaa-eeeeeeeeeee2"
+ARTICLE_JOHNJACOB_ID = "aaaaaaaa-bbbb-4ccc-aaaa-eeeeeeeeeee3"
 
 # "secret", hashed
 SECRET = "$argon2i$v=19$m=512,t=2,p=2$mRMCwLg3Rgih1JqTUooxxg$/bBw6iXly9rfryTkaoPX/Q"
@@ -65,6 +67,17 @@ def add_users(db: Session) -> None:
     two.follows.append(one)
     logger.info("User added", username=two.username)
 
+    # Postman tests expect this user to be present
+    johnjacob = User(
+        id=USER_JOHNJACOB_ID,
+        email="johnjacob@bar.com",
+        username="johnjacob",
+        password_hash=SECRET,
+    )
+    db.add(johnjacob)
+    johnjacob.follows.append(one)
+    logger.info("User added", username=johnjacob.username)
+
     db.flush()
 
 
@@ -97,6 +110,20 @@ def add_articles(db: Session) -> None:
     )
     db.add(bar)
     logger.info("Article added", slug=bar.slug)
+
+    # Postman tests require this user to have at least one article
+    johnjacob = Article(
+        id=ARTICLE_JOHNJACOB_ID,
+        slug="i-am-johnjacob",
+        title="I am John Jacob",
+        description="johnjacob desc",
+        body="johnjacob body",
+        author=User.by_username("johnjacob", db=db),
+        created=datetime(2019, 5, 5, 5, 5, 5, 5),
+        updated=datetime(2019, 6, 6, 6, 6, 6, 6),
+    )
+    db.add(johnjacob)
+    logger.info("Article added", slug=johnjacob.slug)
 
     db.flush()
 

@@ -1,18 +1,33 @@
 """Tests for Article related views."""
 
 from conduit.auth.tests.test_auth_views import USER_TWO_JWT
-from freezegun import freeze_time
 from webtest import TestApp
 
 
-@freeze_time("2019-01-01")
 def test_GET_articles(testapp: TestApp, democontent: None) -> None:
     """Test GET /api/articles."""
     res = testapp.get("/api/articles", status=200)
 
     assert res.json == {
-        "articlesCount": 2,
+        "articlesCount": 3,
         "articles": [
+            {
+                "slug": "i-am-johnjacob",
+                "title": "I am John Jacob",
+                "description": "johnjacob desc",
+                "body": "johnjacob body",
+                "createdAt": "2019-05-05T05:05:05.000005Z",
+                "updatedAt": "2019-06-06T06:06:06.000006Z",
+                "tagList": ["foo", "bar"],
+                "favorited": False,
+                "favoritesCount": 0,
+                "author": {
+                    "username": "johnjacob",
+                    "bio": "",
+                    "image": "",
+                    "following": False,
+                },
+            },
             {
                 "slug": "bar",
                 "title": "Bär",
@@ -49,6 +64,15 @@ def test_GET_articles(testapp: TestApp, democontent: None) -> None:
             },
         ],
     }
+
+
+def test_GET_articles_filter_by_author(testapp: TestApp, democontent: None) -> None:
+    """Test GET /api/articles, filter by author."""
+    res = testapp.get("/api/articles?author=one", status=200)
+    assert res.json["articlesCount"] == 2
+
+    res = testapp.get("/api/articles?author=two", status=200)
+    assert res.json["articlesCount"] == 0
 
 
 def test_GET_article(testapp: TestApp, democontent: None) -> None:

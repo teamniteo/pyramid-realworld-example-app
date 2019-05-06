@@ -1,6 +1,7 @@
 """HTTP operations on Article resource."""
 
 from conduit.article.models import Article
+from conduit.auth.models import User
 from conduit.openapi import object_or_404
 from mypy_extensions import TypedDict
 from pyramid.request import Request
@@ -22,8 +23,18 @@ SingleArticleResponse = TypedDict("SingleArticleResponse", {"article": Article})
 @view_config(route_name="articles", renderer="json", request_method="GET", openapi=True)
 def articles(request: Request) -> MultipleArticlesResponse:
     """Get recent articles globally."""
-    articles = request.db.query(Article).order_by(desc("created")).all()
-    count = request.db.query(Article).count()
+
+    q = request.db.query(Article)
+    q = q.order_by(desc("created"))
+
+    if request.openapi_validated.parameters.get("query", {}).get("author"):
+        author = User.by_username(
+            request.openapi_validated.parameters["query"]["author"], db=request.db
+        )
+        q = q.filter(Article.author == author)
+
+    articles = q.all()
+    count = q.count()
     return {"articles": articles, "articlesCount": count}
 
 
