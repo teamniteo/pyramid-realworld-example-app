@@ -75,6 +75,24 @@ def test_GET_articles_filter_by_author(testapp: TestApp, democontent: None) -> N
     assert res.json["articlesCount"] == 0
 
 
+def test_GET_articles_limit(testapp: TestApp, democontent: None) -> None:
+    """Test GET /api/articles, but limit to N results."""
+    res = testapp.get("/api/articles", status=200)
+    assert res.json["articlesCount"] == 3
+
+    res = testapp.get("/api/articles?limit=2", status=200)
+    assert res.json["articlesCount"] == 2
+
+
+def test_GET_articles_offset(testapp: TestApp, democontent: None) -> None:
+    """Test GET /api/articles, but limit to N results, offset by M results."""
+    res = testapp.get("/api/articles?limit=2", status=200)
+    assert res.json["articles"][1]["title"] == "Bär"
+
+    res = testapp.get("/api/articles?limit=2&offset=1", status=200)
+    assert res.json["articles"][1]["title"] == "Foö"
+
+
 def test_GET_article(testapp: TestApp, democontent: None) -> None:
     """Test GET /api/article/{slug}."""
     res = testapp.get("/api/articles/foo", status=200)

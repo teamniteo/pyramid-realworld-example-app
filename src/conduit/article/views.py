@@ -27,11 +27,14 @@ def articles(request: Request) -> MultipleArticlesResponse:
     q = request.db.query(Article)
     q = q.order_by(desc("created"))
 
-    if request.openapi_validated.parameters.get("query", {}).get("author"):
+    if request.openapi_validated.parameters["query"].get("author"):
         author = User.by_username(
             request.openapi_validated.parameters["query"]["author"], db=request.db
         )
         q = q.filter(Article.author == author)
+
+    q = q.limit(request.openapi_validated.parameters["query"].get("limit", 20))
+    q = q.offset(request.openapi_validated.parameters["query"].get("offset", 0))
 
     articles = q.all()
     count = q.count()
