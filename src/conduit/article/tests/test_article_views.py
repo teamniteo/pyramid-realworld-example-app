@@ -236,8 +236,8 @@ def test_POST_article(testapp: TestApp, democontent: None) -> None:
     # }
 
 
-def test_UPDATE_article(testapp: TestApp, democontent: None) -> None:
-    """Test UPDATE /api/articles/{slug}."""
+def test_PUT_article(testapp: TestApp, democontent: None) -> None:
+    """Test PUT /api/articles/{slug}."""
     res = testapp.put_json(
         "/api/articles/foo",
         {
@@ -267,8 +267,8 @@ def test_UPDATE_article(testapp: TestApp, democontent: None) -> None:
     }
 
 
-def test_UPDATE_article_empty_request(testapp: TestApp, democontent: None) -> None:
-    """Test UPDATE /api/articles/{slug} with empty request, nothing happens."""
+def test_PUT_article_empty_request(testapp: TestApp, democontent: None) -> None:
+    """Test PUT /api/articles/{slug} with empty request, nothing happens."""
     testapp.put_json(
         "/api/articles/foo",
         {"article": {}},
