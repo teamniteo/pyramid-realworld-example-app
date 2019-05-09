@@ -96,11 +96,31 @@ def create(request: Request) -> SingleArticleResponse:
     return {"article": article}
 
 
+@view_config(route_name="article", renderer="json", request_method="PUT", openapi=True)
+def update(request: Request) -> SingleArticleResponse:
+    """Update an article."""
+    body = request.openapi_validated.body
+    article = object_or_404(
+        Article.by_slug(
+            request.openapi_validated.parameters["path"]["slug"], db=request.db
+        )
+    )
+
+    if getattr(body.article, "title", None):
+        article.title = body.article.title
+    if getattr(body.article, "description", None):
+        article.description = body.article.description
+    if getattr(body.article, "body", None):
+        article.body = body.article.body
+
+    return {"article": article}
+
+
 @view_config(
     route_name="article", renderer="json", request_method="DELETE", openapi=True
 )
 def delete(request: Request) -> None:
-    """Get an article."""
+    """Delete an article."""
     article = object_or_404(
         Article.by_slug(
             request.openapi_validated.parameters["path"]["slug"], db=request.db
