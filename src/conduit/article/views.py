@@ -21,6 +21,22 @@ MultipleArticlesResponse = TypedDict(
 SingleArticleResponse = TypedDict("SingleArticleResponse", {"article": Article})
 
 
+@view_config(route_name="feed", renderer="json", request_method="GET", openapi=True)
+def feed(request: Request) -> MultipleArticlesResponse:
+    """Get your article feed."""
+    q = request.db.query(Article)
+    q = q.order_by(desc("created"))
+
+    q = q.filter(Article.author_id.in_([user.id for user in request.user.follows]))
+
+    q = q.limit(request.openapi_validated.parameters["query"].get("limit", 20))
+    q = q.offset(request.openapi_validated.parameters["query"].get("offset", 0))
+
+    articles = q.all()
+    count = q.count()
+    return {"articles": articles, "articlesCount": count}
+
+
 @view_config(route_name="articles", renderer="json", request_method="GET", openapi=True)
 def articles(request: Request) -> MultipleArticlesResponse:
     """Get recent articles globally."""

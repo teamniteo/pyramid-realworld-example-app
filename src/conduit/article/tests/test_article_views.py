@@ -6,6 +6,55 @@ from conduit.auth.tests.test_auth_views import USER_TWO_JWT
 from webtest import TestApp
 
 
+def test_feed(testapp: TestApp, democontent: None) -> None:
+    """Test GET /api/articles/feed."""
+    res = testapp.get(
+        "/api/articles/feed",
+        headers={"Authorization": f"Token {USER_TWO_JWT}"},
+        status=200,
+    )
+
+    assert res.json == {
+        "articlesCount": 2,
+        "articles": [
+            {
+                "slug": "bar",
+                "title": "Bär",
+                "description": "Bär desc",
+                "body": "Bär body",
+                "createdAt": "2019-03-03T03:03:03.000003Z",
+                "updatedAt": "2019-04-04T04:04:04.000004Z",
+                "tagList": [],
+                "favorited": False,
+                "favoritesCount": 0,
+                "author": {
+                    "username": "one",
+                    "bio": "",
+                    "image": "",
+                    "following": True,
+                },
+            },
+            {
+                "slug": "foo",
+                "title": "Foö",
+                "description": "Foö desc",
+                "body": "Foö body",
+                "createdAt": "2019-01-01T01:01:01.000001Z",
+                "updatedAt": "2019-02-02T02:02:02.000002Z",
+                "tagList": ["dogs", "cats"],
+                "favorited": False,
+                "favoritesCount": 0,
+                "author": {
+                    "username": "one",
+                    "bio": "",
+                    "image": "",
+                    "following": True,
+                },
+            },
+        ],
+    }
+
+
 def test_GET_articles(testapp: TestApp, democontent: None) -> None:
     """Test GET /api/articles."""
     res = testapp.get("/api/articles", status=200)
