@@ -4,6 +4,8 @@ from alembic.command import EnvironmentContext
 from alembic.config import Config
 from alembic.migration import MigrationContext
 from alembic.script import ScriptDirectory
+from paste.deploy.loadwsgi import APP
+from paste.deploy.loadwsgi import ConfigLoader
 from pyramid.config import Configurator
 from pyramid.router import Router
 from pyramid_heroku import expandvars_dict
@@ -37,6 +39,25 @@ def configure_logging() -> None:
     )
 
 
+def get_alembic_config(ini_path: str) -> Config:
+    """Build an alembic config file that supports use= lines.
+
+    The paste.deploy config files that we are deriving alembic configuration from
+    support extensions to the configparser format. This uses paste.deploy to parse the
+    config and then creates a new alembic configuration that uses the extracted values
+    directly.
+    """
+    # Use paste.deploy to parse config file and build an alembic config
+    test_ini = ConfigLoader(ini_path)
+    configuration = test_ini.get_context(APP, "conduit").config()
+
+    # The alembic config only cares about app:conduit
+    alembic_config = Config(ini_section="app:conduit")
+    for key, value in configuration.items():
+        alembic_config.set_section_option("app:conduit", key, value)
+    return alembic_config
+
+
 def check_db_migrated(config: Configurator, global_config: t.Dict[str, str]) -> None:
     """Check if db is migrated to the latest alembic step.
 
@@ -50,7 +71,8 @@ def check_db_migrated(config: Configurator, global_config: t.Dict[str, str]) -> 
         return
 
     # get latest migration file
-    alembic_config = Config(global_config["__file__"], "app:conduit")
+    alembic_config = get_alembic_config(global_config["__file__"])
+
     script = ScriptDirectory.from_config(alembic_config)
     head = EnvironmentContext(alembic_config, script).get_head_revision()
 

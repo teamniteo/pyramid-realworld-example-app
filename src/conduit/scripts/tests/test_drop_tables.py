@@ -4,8 +4,6 @@ Since this script is used a lot in other test suites, we only need very
 simple testing here.
 """
 
-from alembic import command
-from alembic.config import Config
 from conduit.conftest import AppEnvType
 from conduit.scripts.drop_tables import main
 from pyramid.registry import Registry
@@ -32,6 +30,7 @@ def test_drop_tables(argparse: mock.MagicMock, app_env: AppEnvType) -> None:
     )
     assert len(list(tables)) == 0
 
-    # re-create the dropped tables so that other tests work
-    alembic_cfg = Config("etc/test.ini", "app:conduit")
-    command.upgrade(alembic_cfg, "head")
+    # re-create the dropped tables so that other tests work by re-running a fixture
+    from conduit.conftest import app_env as app_env_fixture
+
+    app_env_fixture.__wrapped__("etc/test.ini")

@@ -49,7 +49,7 @@ def test_database_outdated(
     config.registry.settings[
         "sqlalchemy.engine"
     ].connect.return_value.__exit__ = mock.Mock(return_value=None)
-    global_config = {"__file__": "foofile"}
+    global_config = {"__file__": "etc/test.ini"}
 
     EnvironmentContext.return_value.get_head_revision.return_value = "foo"
     MigrationContext.configure.return_value.get_current_revision.return_value = "bar"
@@ -83,7 +83,7 @@ def test_database_up_to_date(
     config.registry.settings[
         "sqlalchemy.engine"
     ].connect.return_value.__exit__ = mock.Mock(return_value=None)
-    global_config = {"__file__": "foofile"}
+    global_config = {"__file__": "etc/test.ini"}
 
     EnvironmentContext.return_value.get_head_revision.return_value = "foo"
     MigrationContext.configure.return_value.get_current_revision.return_value = "foo"
@@ -101,7 +101,7 @@ def test_SKIP_CHECK_DB_MIGRATED(
 ) -> None:
     """Support skipping the check with a config flag."""
     main(  # type: ignore
-        {"__file__": "foofile", "SKIP_CHECK_DB_MIGRATED": "true"}, **{}
+        {"__file__": "etc/test.ini", "SKIP_CHECK_DB_MIGRATED": "true"}, **{}
     )
     check_db_migrated.assert_not_called()
 
@@ -115,5 +115,5 @@ def test_not_SKIP_CHECK_DB_MIGRATED(
     check_db_migrated: mock.MagicMock,
 ) -> None:
     """Support skipping the check with a config flag."""
-    main({"__file__": "foofile"}, **{})  # type: ignore
-    check_db_migrated.assert_called_with(Configurator(), {"__file__": "foofile"})
+    main({"__file__": "etc/test.ini"}, **{})  # type: ignore
+    check_db_migrated.assert_called_with(Configurator(), {"__file__": "etc/test.ini"})

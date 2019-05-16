@@ -7,7 +7,7 @@
 """
 
 from alembic import command
-from alembic.config import Config
+from conduit import get_alembic_config
 from conduit.scripts.populate import add_articles
 from conduit.scripts.populate import add_users
 from pyramid.paster import bootstrap
@@ -40,8 +40,7 @@ def app_env(ini_path: str) -> AppEnvType:
     """Initialize WSGI application from INI file given on the command line."""
     env = bootstrap(ini_path, options={"SKIP_CHECK_DB_MIGRATED": "true"})
 
-    # build schema
-    alembic_cfg = Config("etc/test.ini", "app:conduit")
+    alembic_cfg = get_alembic_config(ini_path)
     command.upgrade(alembic_cfg, "head")
     return env
 
