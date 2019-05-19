@@ -1,9 +1,9 @@
 """Environment in which Alembic migrations run."""
 
 from alembic import context
+from conduit.util import expandvars_dict
 from pyramid.paster import bootstrap
 from pyramid_deferred_sqla import Base
-from pyramid_heroku import expandvars_dict
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 

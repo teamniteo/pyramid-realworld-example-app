@@ -4,9 +4,9 @@ from alembic.command import EnvironmentContext
 from alembic.config import Config
 from alembic.migration import MigrationContext
 from alembic.script import ScriptDirectory
+from conduit.util import expandvars_dict
 from pyramid.config import Configurator
 from pyramid.router import Router
-from pyramid_heroku import expandvars_dict
 
 import alembic
 import structlog
@@ -102,7 +102,7 @@ def configure(config: Configurator) -> None:
     )
 
 
-def main(global_config: t.Dict[str, str], **settings: t.Dict[str, str]) -> Router:
+def main(global_config: t.Dict[str, str], **settings: str) -> Router:
     """Return a Pyramid WSGI application."""
     # Expand environment variables in .ini files
     settings = expandvars_dict(settings)

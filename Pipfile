@@ -20,6 +20,7 @@ pyramid_redirect = "*"
 python-slugify = "*"
 raven = "*"
 structlog = "*"
+expandvars = "*"
 
 [dev-packages]
 black = "==19.3b0"
