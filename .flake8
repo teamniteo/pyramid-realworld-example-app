@@ -4,6 +4,8 @@ exclude = .git,.venv
 # allow up to 10% leeway
 max-line-length = 80
 select += B950
+
+# enforce lineleak limit at 100
 max-line-count = 100
 
 ignore =
