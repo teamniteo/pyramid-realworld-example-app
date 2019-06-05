@@ -64,7 +64,7 @@ d. Display number of lines containing live code::
     linesleak.py:118:1: LLI200 [INFO] Live code count: 56 logical and 79 physical lines
 
 e. Ignore limit enforcement.
-In adherence with flake8 design principles, lineleak can be silenced by adding the appropriate error codes of lineleak to the ignore list::
+   In adherence with flake8 design principles, lineleak can be silenced by adding the appropriate error codes of lineleak to the ignore    list::
 
     $ flake8 --ignore=LL linesleak.py
     $
@@ -75,8 +75,8 @@ Environment
 
 Dependencies & Compatibility
 ----------------------------
-* Best suited for `flake8` 3.3 - 3.6
-* Not compatible with `flake8` >= 3.7, due to an issue related to the OptionManager conflict handling.
+* Best suited for ``flake8`` 3.3 - 3.6
+* Not compatible with ``flake8`` >= 3.7, due to an issue related to the OptionManager conflict handling.
 * No external libraries required currently
 
 Software Cycle Stage
