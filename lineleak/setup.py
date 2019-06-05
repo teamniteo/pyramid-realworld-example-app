@@ -12,8 +12,8 @@ setup(
     description="Lineleak is a flake8 plugin that counts the"
 	"lines containing live code in a script, and 'yells' if"
     "a set limit is exceeded. It is meant to help enforce"
-    "short scripts and modular python programming."
-	long_description=long_description()
+    "short scripts and modular python programming.",
+	long_description=long_description(),
     keywords=["flake8", "lineleak", "counter", "lines"],
     author="Victor Ayi",
     author_email="ayivima@hotmail.com",
