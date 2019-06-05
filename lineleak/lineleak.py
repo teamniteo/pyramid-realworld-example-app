@@ -34,7 +34,7 @@ class screener(object):
 
     LOGICAL = False
     LIVE_CODE_COUNT = False
-    MAX_LINE_COUNT = 500
+    MAX_LINE_COUNT = 100
 
     def __init__(self, tree, file_tokens, filename):
         self.leak_line = None
