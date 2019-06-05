@@ -1,6 +1,6 @@
 """
 
-(c) Copyright 2019, Niteo Gmbh 
+(c) Copyright 2019, Victor Ayi 
 
 """
 
