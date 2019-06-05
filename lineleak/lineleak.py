@@ -1,6 +1,6 @@
 """
 
-(c) Copyright 2019, ayivima@hotmail.com 
+(c) Copyright 2019, Niteo Gmbh 
 
 """
 
