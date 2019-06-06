@@ -777,6 +777,13 @@
             "index": "pypi",
             "version": "==2.7.0"
         },
+        "flake8-lineleak": {
+            "hashes": [
+                "sha256:94c25e6596503e6c9a29ef6a203edf94e4c3d925baefd5ea956f273e8efb20e0"
+            ],
+            "index": "pypi",
+            "version": "==1.0"
+        },
         "flake8-mock": {
             "hashes": [
                 "sha256:2fa775e7589f4e1ad74f35d60953eb20937f5d7355235e54bf852c6837f2bede"
