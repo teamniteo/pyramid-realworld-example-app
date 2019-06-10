@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fb3bc6c04b35000f9b37ade146e620dfa930d82fac7ee850e187d91e8cb0861e"
+            "sha256": "c431f3c81428b387d699248edba237b207d8900afd970b0c5a40ae9765687323"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -338,12 +338,9 @@
             "version": "==1.4.1"
         },
         "pyramid-openapi3": {
-            "hashes": [
-                "sha256:197c2ae9173a1cf769bfd9725d87429e5a02465d2d5ccf47506089a0b10074e4",
-                "sha256:dc09ec2279812b8345030f0bbbe66dc8928ea5ca4966a532dd8aaf4e3a6210d6"
-            ],
-            "index": "pypi",
-            "version": "==0.3.0"
+            "editable": true,
+            "git": "https://github.com/gweis/pyramid_openapi3.git",
+            "ref": "8767bf05a17c68133883915c0cf37b541039fd1e"
         },
         "pyramid-redirect": {
             "hashes": [

@@ -15,7 +15,7 @@ pyramid_deferred_sqla = {git = "https://github.com/niteoweb/pyramid_deferred_sql
 pyramid_force_https = "*"
 pyramid_heroku = "*"
 pyramid_jwt = "*"
-pyramid_openapi3 = "*"
+pyramid_openapi3 = {git = "https://github.com/gweis/pyramid_openapi3.git", ref = "8767bf0", editable = true}
 pyramid_redirect = "*"
 python-slugify = "*"
 raven = "*"
