@@ -49,6 +49,9 @@ RealWorld.io frontend.
 
 You need to have docker, [pipenv](https://pipenv.readthedocs.io/) and Python 3.7 installed on your machine. Docker should be running. Then you can run:
 
+    $ cd ~/projects
+    $ git clone https://github.com/niteoweb/pyramid-realworld-example-app.git
+    $ cd pyramid-realworld-example-app
     $ make install
     $ make start-pgsql
     $ make devdb
