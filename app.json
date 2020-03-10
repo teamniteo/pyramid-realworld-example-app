@@ -18,5 +18,5 @@
     {"plan": "heroku-postgresql"},
     {"plan": "papertrail"}
   ],
-  "scripts": {}
+  "scripts": {"postdeploy": "echo Heroku rocks"}
 }
