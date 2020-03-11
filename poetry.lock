@@ -622,7 +622,7 @@ python-versions = "*"
 version = "0.6.1"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "More routines for operating on iterables, beyond itertools"
 name = "more-itertools"
 optional = false
@@ -678,19 +678,36 @@ description = ""
 name = "openapi-core"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
-version = "0.13.1"
+version = "0.13.3"
 
 [package.dependencies]
 attrs = "*"
-isodate = "*"
 lazy-object-proxy = "*"
+more-itertools = "*"
+openapi-schema-validator = "*"
 openapi-spec-validator = "*"
+parse = "*"
 six = "*"
-strict-rfc3339 = "*"
+werkzeug = "*"
 
 [package.extras]
 django = ["django (>=2.2)"]
-flask = ["werkzeug"]
+flask = ["flask"]
+requests = ["requests"]
+
+[[package]]
+category = "main"
+description = ""
+name = "openapi-schema-validator"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
+version = "0.1.1"
+
+[package.dependencies]
+isodate = "*"
+jsonschema = "*"
+six = "*"
+strict-rfc3339 = "*"
 
 [[package]]
 category = "main"
@@ -726,7 +743,7 @@ pyparsing = ">=2.0.2"
 six = "*"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "parse() is the opposite of format()"
 name = "parse"
 optional = false
@@ -837,8 +854,8 @@ category = "dev"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
 name = "pre-commit"
 optional = false
-python-versions = ">=3.6"
-version = "2.1.1"
+python-versions = ">=3.6.1"
+version = "2.2.0"
 
 [package.dependencies]
 cfgv = ">=2.0.0"
@@ -1062,7 +1079,7 @@ description = "Pyramid addon for OpenAPI3 validation"
 name = "pyramid-openapi3"
 optional = false
 python-versions = "*"
-version = "0.5.0b4"
+version = "0.5.1"
 
 [package.dependencies]
 openapi-core = "*"
@@ -1129,7 +1146,7 @@ description = "pytest: simple powerful testing with Python"
 name = "pytest"
 optional = false
 python-versions = ">=3.5"
-version = "5.3.5"
+version = "5.4.0"
 
 [package.dependencies]
 atomicwrites = ">=1.0"
@@ -1725,7 +1742,7 @@ transaction = ">=1.6.0"
 test = ["zope.testing"]
 
 [metadata]
-content-hash = "ac5c8fd3866604ddaf519b748bcee5aad446df95676bb02866aff9cab9943ce9"
+content-hash = "4cdd8203296aef05442c2271d448a9aa3d7a1427dbed24c202a3b53a9a8de37d"
 python-versions = "~3.8"
 
 [metadata.files]
@@ -2117,9 +2134,14 @@ npm = [
     {file = "npm-0.1.1.tar.gz", hash = "sha256:84aefc83a3486d034c4c14f8bcd4b746b95b529289b0d042c268f6201c3034e9"},
 ]
 openapi-core = [
-    {file = "openapi-core-0.13.1.tar.gz", hash = "sha256:e4b303a2c3f484cf449b9bb3a377dcb798d1f04230f0c78fb82f5f34d7d0bf64"},
-    {file = "openapi_core-0.13.1-py2-none-any.whl", hash = "sha256:906c397c8e3ac9bc6e900160ad5a30f39489757274ac1766103bdb472a7cf277"},
-    {file = "openapi_core-0.13.1-py3-none-any.whl", hash = "sha256:d61305484f8fefda78fdddaf8890af6804fae99dff94013abd9480873880bddc"},
+    {file = "openapi-core-0.13.3.tar.gz", hash = "sha256:57973b7383214a529012cf65ddac8c22b25a4df497366e588e88c627581c2928"},
+    {file = "openapi_core-0.13.3-py2-none-any.whl", hash = "sha256:df53cc8b9d217616bbde4e6ef943c9213af810a01cd74f62e7885756c6080af4"},
+    {file = "openapi_core-0.13.3-py3-none-any.whl", hash = "sha256:8c5e2053c51f8d43d241b54d322f6c1c32adf1a20617490d361d9c0d5a123448"},
+]
+openapi-schema-validator = [
+    {file = "openapi-schema-validator-0.1.1.tar.gz", hash = "sha256:8fc97a575393d179d70e7c7ebd30ed9fc46eb6c5013f2790736c2e50ea150f06"},
+    {file = "openapi_schema_validator-0.1.1-py2-none-any.whl", hash = "sha256:3f0b0f9086e7d717a0413a462d3d9e6f82f7e80a744abf21943ee2e0d9e8c50d"},
+    {file = "openapi_schema_validator-0.1.1-py3-none-any.whl", hash = "sha256:b7afe93aff4a876781279b376c1ba5decb338483e9484af26b140ef215119e23"},
 ]
 openapi-spec-validator = [
     {file = "openapi-spec-validator-0.2.8.tar.gz", hash = "sha256:e489c7a273284bc78277ac22791482e8058d323b4a265015e9fcddf6a8045bcd"},
@@ -2168,8 +2190,8 @@ pluggy = [
     {file = "pluggy-0.13.1.tar.gz", hash = "sha256:15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0"},
 ]
 pre-commit = [
-    {file = "pre_commit-2.1.1-py2.py3-none-any.whl", hash = "sha256:09ebe467f43ce24377f8c2f200fe3cd2570d328eb2ce0568c8e96ce19da45fa6"},
-    {file = "pre_commit-2.1.1.tar.gz", hash = "sha256:f8d555e31e2051892c7f7b3ad9f620bd2c09271d87e9eedb2ad831737d6211eb"},
+    {file = "pre_commit-2.2.0-py2.py3-none-any.whl", hash = "sha256:487c675916e6f99d355ec5595ad77b325689d423ef4839db1ed2f02f639c9522"},
+    {file = "pre_commit-2.2.0.tar.gz", hash = "sha256:c0aa11bce04a7b46c5544723aedf4e81a4d5f64ad1205a30a9ea12d5e81969e1"},
 ]
 pre-commit-hooks = [
     {file = "pre_commit_hooks-2.5.0-py2.py3-none-any.whl", hash = "sha256:052adeef36b13c87f5c49922f15ca047993f09d4fe8fdfb091436f3e4a56892b"},
@@ -2264,8 +2286,8 @@ pyramid-jwt = [
     {file = "pyramid_jwt-1.4.1.tar.gz", hash = "sha256:ee21d0c4bc0cc9af2875930abb55c41615d473fee7bd83023bcb61aa36691612"},
 ]
 pyramid-openapi3 = [
-    {file = "pyramid_openapi3-0.5.0b4-py2.py3-none-any.whl", hash = "sha256:e46680965e333f97e7df395549de30aebb9ea05cbf7279482923e3c396336956"},
-    {file = "pyramid_openapi3-0.5.0b4.tar.gz", hash = "sha256:0c1cb01452aa10fd12aa4e6ef3ef9704f5f2b643412781f0d623503d5a35b26b"},
+    {file = "pyramid_openapi3-0.5.1-py2.py3-none-any.whl", hash = "sha256:ea7c98f4c302c79ea65a5694216837ee5dc7541be36cba26306691facf0780f9"},
+    {file = "pyramid_openapi3-0.5.1.tar.gz", hash = "sha256:195343a7f316e4e86ef71b05ff6fdc6d84900179a0026ef340858ad1f67e9e37"},
 ]
 pyramid-redirect = [
     {file = "pyramid_redirect-0.3.tar.gz", hash = "sha256:95f1d8c4eb9d49b793f31425766278786c416e281fde0a181d95585d2d4c6a18"},
@@ -2282,8 +2304,8 @@ pyrsistent = [
     {file = "pyrsistent-0.15.7.tar.gz", hash = "sha256:cdc7b5e3ed77bed61270a47d35434a30617b9becdf2478af76ad2c6ade307280"},
 ]
 pytest = [
-    {file = "pytest-5.3.5-py3-none-any.whl", hash = "sha256:ff615c761e25eb25df19edddc0b970302d2a9091fbce0e7213298d85fb61fef6"},
-    {file = "pytest-5.3.5.tar.gz", hash = "sha256:0d5fe9189a148acc3c3eb2ac8e1ac0742cb7618c084f3d228baaec0c254b318d"},
+    {file = "pytest-5.4.0-py3-none-any.whl", hash = "sha256:48c891b40d391ec824477c13d10d5eadf698c83a1671aba491f6db222035d6da"},
+    {file = "pytest-5.4.0.tar.gz", hash = "sha256:76418969e4b9db462a393f1baa13eeb39ba32eccf6013657f4f8295baa234842"},
 ]
 pytest-bdd = [
     {file = "pytest-bdd-3.2.1.tar.gz", hash = "sha256:17e73d2fe119de15bfc7fc1fe639fa4df9ab931e5aa552435fdddcf100c97ec5"},
