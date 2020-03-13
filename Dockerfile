@@ -33,7 +33,7 @@ WORKDIR /app
 
 # Create an entrypoint
 RUN \
-	echo $'#!/usr/bin/env nix-shell\n#!nix-shell --argstr type run -i bash /app/shell.nix\npoetry run "$@"' \
+	echo $'#!/usr/bin/env nix-shell\n#!nix-shell --argstr type run -i bash /app/shell.nix\nsource .venv/bin/activate\neval "$@"' \
 	| tee /usr/local/bin/docker-entrypoint.sh \
 	&& chmod +x /usr/local/bin/docker-entrypoint.sh
 
