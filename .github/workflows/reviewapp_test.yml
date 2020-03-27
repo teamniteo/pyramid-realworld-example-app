@@ -1,7 +1,7 @@
-on:
+on: 
   pull_request:
-    branches:
-    - master
+    branches: [master]
+    types: [synchronize, opened, reopened, ready_for_review]
 
 
 name: Review App Testing
