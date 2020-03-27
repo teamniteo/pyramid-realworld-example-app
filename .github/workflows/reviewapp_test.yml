@@ -8,6 +8,7 @@ name: Review App Testing
 jobs:
   review-app-test:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
     steps:
       - name: Check Review deploy status
         id: reviewapp_deploy_status
