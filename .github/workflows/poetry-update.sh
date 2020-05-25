@@ -1,5 +1,8 @@
 set -xeu
 
+# Fetch unshallow
+git fetch --unshallow
+
 # Update the python packages
 poetry update
 
