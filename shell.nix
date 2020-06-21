@@ -12,13 +12,6 @@ let
   };
   inherit (pkgs) lib;
 
-  # TODO: Remove this when upgrading to nixos-20.03 when we can
-  # use poetry from the stable channel
-  unstable = import (fetchTarball {
-    url = "https://github.com/nixos/nixpkgs/tarball/76e1d5cf3b8f817e4e43f5b0fcdb951426956c35";
-    sha256 = "1iz5dr9xx8qa1m94pjlr0dmb0b1syp2sp1514gw10r877cjxqvd8";
-  }) { config = {}; overlays = []; };
-
   dependencies = let mapping = {
     develop = developDeps ++ testDeps ++ buildDeps ++ runDeps;
     test = testDeps ++ buildDeps ++ runDeps;
@@ -52,7 +45,6 @@ let
     libxslt
     netcat
     openssl
-    python38Full
     which
     zlib
     jq
@@ -73,8 +65,9 @@ let
 
   # Only these dependencies are needed to run in production
   runDeps = with pkgs; [
-    ( unstable.poetry.override { python = unstable.python38; } )
-    unstable.postgresql_12    # For interacting with the database
+    python38
+    poetry
+    postgresql_12    # For interacting with the database
   ];
 in
 

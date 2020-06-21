@@ -260,185 +260,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenericErrorModel"
-  /articles:
-    get:
-      summary: Get recent articles globally
-      description: Get most recent articles globally. Use query parameters to filter
-        results. Auth is optional
-      tags:
-        - Articles
-      operationId: GetArticles
-      parameters:
-        - name: tag
-          in: query
-          description: Filter by tag
-          required: false
-          schema:
-            type: string
-        - name: author
-          in: query
-          description: Filter by author (username)
-          required: false
-          schema:
-            type: string
-        - name: favorited
-          in: query
-          description: Filter by favorites of a user (username)
-          required: false
-          schema:
-            type: string
-        - name: limit
-          in: query
-          description: Limit number of articles returned (default is 20)
-          required: false
-          schema:
-            type: integer
-            default: 20
-        - name: offset
-          in: query
-          description: Offset/skip number of articles (default is 0)
-          required: false
-          schema:
-            type: integer
-            default: 0
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MultipleArticlesResponse"
-        "401":
-          description: Unauthorized
-        "422":
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorModel"
-    post:
-      summary: Create an article
-      description: Create an article. Auth is required
-      tags:
-        - Articles
-      security:
-        - Token:
-            []
-      operationId: CreateArticle
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/NewArticleRequest"
-        description: Article to create
-        required: true
-      responses:
-        "201":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SingleArticleResponse"
-        "401":
-          description: Unauthorized
-        "422":
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorModel"
-  "/articles/{slug}":
-    get:
-      summary: Get an article
-      description: Get an article. Auth not required
-      tags:
-        - Articles
-      operationId: GetArticle
-      parameters:
-        - name: slug
-          in: path
-          required: true
-          description: Slug of the article to get
-          schema:
-            type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SingleArticleResponse"
-        "422":
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorModel"
-    put:
-      summary: Update an article
-      description: Update an article. Auth is required
-      tags:
-        - Articles
-      security:
-        - Token:
-            []
-      operationId: UpdateArticle
-      parameters:
-        - name: slug
-          in: path
-          required: true
-          description: Slug of the article to update
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateArticleRequest"
-        description: Article to update
-        required: true
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SingleArticleResponse"
-        "401":
-          description: Unauthorized
-        "422":
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorModel"
-    delete:
-      summary: Delete an article
-      description: Delete an article. Auth is required
-      tags:
-        - Articles
-      security:
-        - Token:
-            []
-      operationId: DeleteArticle
-      parameters:
-        - name: slug
-          in: path
-          required: true
-          description: Slug of the article to delete
-          schema:
-            type: string
-      responses:
-        "200":
-          description: OK
-        "401":
-          description: Unauthorized
-        "422":
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericErrorModel"
   "/articles/{slug}/comments":
     get:
       summary: Get comments for an article
@@ -590,6 +411,187 @@ paths:
             type: string
       responses:
         "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SingleArticleResponse"
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericErrorModel"
+  # Due to a strange bug in openapi-core this endpoint needs to be placed
+  # at the bottom of openapi.yaml. See https://github.com/p1c2u/openapi-core/issues/220
+  "/articles/{slug}":
+    get:
+      summary: Get an article
+      description: Get an article. Auth not required
+      tags:
+        - Articles
+      operationId: GetArticle
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          description: Slug of the article to get
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SingleArticleResponse"
+        "422":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericErrorModel"
+    put:
+      summary: Update an article
+      description: Update an article. Auth is required
+      tags:
+        - Articles
+      security:
+        - Token:
+            []
+      operationId: UpdateArticle
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          description: Slug of the article to update
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateArticleRequest"
+        description: Article to update
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SingleArticleResponse"
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericErrorModel"
+    delete:
+      summary: Delete an article
+      description: Delete an article. Auth is required
+      tags:
+        - Articles
+      security:
+        - Token:
+            []
+      operationId: DeleteArticle
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          description: Slug of the article to delete
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericErrorModel"
+  /articles:
+    get:
+      summary: Get recent articles globally
+      description: Get most recent articles globally. Use query parameters to filter
+        results. Auth is optional
+      tags:
+        - Articles
+      operationId: GetArticles
+      parameters:
+        - name: tag
+          in: query
+          description: Filter by tag
+          required: false
+          schema:
+            type: string
+        - name: author
+          in: query
+          description: Filter by author (username)
+          required: false
+          schema:
+            type: string
+        - name: favorited
+          in: query
+          description: Filter by favorites of a user (username)
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Limit number of articles returned (default is 20)
+          required: false
+          schema:
+            type: integer
+            default: 20
+        - name: offset
+          in: query
+          description: Offset/skip number of articles (default is 0)
+          required: false
+          schema:
+            type: integer
+            default: 0
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MultipleArticlesResponse"
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericErrorModel"
+    post:
+      summary: Create an article
+      description: Create an article. Auth is required
+      tags:
+        - Articles
+      security:
+        - Token:
+            []
+      operationId: CreateArticle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewArticleRequest"
+        description: Article to create
+        required: true
+      responses:
+        "201":
           description: OK
           content:
             application/json:

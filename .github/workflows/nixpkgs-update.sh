@@ -2,7 +2,7 @@
 
 set -xeu
 
-NIXPKGS_BRANCH=nixos-19.09
+NIXPKGS_BRANCH=nixos-20.03
 
 prefetch=$(nix-build --no-out-link '<nixpkgs>' -A nix-prefetch-github)/bin/nix-prefetch-github
 hub=$(nix-build --no-out-link '<nixpkgs>' -A gitAndTools.hub)/bin/hub
