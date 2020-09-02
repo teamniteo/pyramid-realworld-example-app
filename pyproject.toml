@@ -42,7 +42,7 @@ structlog = "*"
 
 [tool.poetry.dev-dependencies]
 bandit = "*"
-black = "==19.3b0"
+black = "==20.8b1"
 codespell = "*"
 coverage = "*"
 flake8 = "*"

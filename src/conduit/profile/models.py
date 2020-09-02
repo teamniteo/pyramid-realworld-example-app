@@ -1,6 +1,7 @@
 """A user's Profile."""
 
 from __future__ import annotations
+
 from conduit.auth.models import User
 from pyramid.request import Request
 from sqlalchemy.orm.session import Session
