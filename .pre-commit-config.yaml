@@ -8,7 +8,7 @@ repos:
         -   id: isort
             name: isort
             description: A Python utility that sorts imports alphabetically
-            entry: poetry run isort -rc --atomic
+            entry: poetry run isort
             language: system
             types: [python]
 
