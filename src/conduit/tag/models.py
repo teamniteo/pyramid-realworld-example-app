@@ -1,6 +1,7 @@
 """Tag model."""
 
 from __future__ import annotations
+
 from pyramid.request import Request
 from pyramid_deferred_sqla import Base
 from pyramid_deferred_sqla import Model

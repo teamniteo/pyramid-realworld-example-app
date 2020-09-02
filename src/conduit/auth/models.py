@@ -1,6 +1,7 @@
 """Models related to auth."""
 
 from __future__ import annotations
+
 from passlib.hash import argon2
 from pyramid.request import Request
 from pyramid_deferred_sqla import Base

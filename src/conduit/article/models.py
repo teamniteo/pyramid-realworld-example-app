@@ -1,6 +1,7 @@
 """Article model."""
 
 from __future__ import annotations
+
 from conduit.profile.models import Profile
 from conduit.tag.models import Tag
 from datetime import datetime

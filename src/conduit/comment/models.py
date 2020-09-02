@@ -1,6 +1,7 @@
 """Comment model."""
 
 from __future__ import annotations
+
 from conduit.profile.models import Profile
 from datetime import datetime
 from pyramid.request import Request
