@@ -28,7 +28,7 @@
 > ### Pyramid codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
 
 
-### [Demo (app)](https://pyramid-realworld.herokuapp.com/)&nbsp;&nbsp;&nbsp;&nbsp;[Demo (api)](https://pyramid-realworld.herokuapp.com/api)
+### [Demo (app)](https://pyramid-openapi3.pylonsproject.org/)&nbsp;&nbsp;&nbsp;&nbsp;[Demo (api)](https://pyramid-openapi3.pylonsproject.org/api)
 
 
 This codebase was created to demonstrate a fully fledged fullstack application built with **Pyramid** including CRUD operations, authentication, routing, pagination, and more.
@@ -40,7 +40,7 @@ For more information on how this works with other frontends/backends, head over 
 
 # How it works
 
-Pyramid using [pyramid_openapi3](https://github.com/pylons/pyramid_openapi3) for request/response validation and [pyramid_deferred_sqla](https://github.com/niteoweb/pyramid_deferred_sqla) for PostgreSQL integration. Deployed to [Heroku](https://pyramid-realworld.herokuapp.com/api).
+Pyramid using [pyramid_openapi3](https://github.com/pylons/pyramid_openapi3) for request/response validation and [pyramid_deferred_sqla](https://github.com/niteoweb/pyramid_deferred_sqla) for PostgreSQL integration. Deployed to [Heroku](https://pyramid-openapi3.pylonsproject.org/api).
 
 Pyramid serves one of the [RealWorld.io frontends](https://github.com/gothinkster/realworld#frontends) (Elm) on root, so it is easier to understand how things fit together. The frontend is interchangeable, you can use any
 RealWorld.io frontend.

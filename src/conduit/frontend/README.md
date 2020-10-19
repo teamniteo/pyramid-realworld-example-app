@@ -1,6 +1,6 @@
 # Frontend
 
-To make the example more usable and presentable, let's serve one of the RealWorld.io's frontend implementations on https://pyramid-realworld.herokuapp.com/.
+To make the example more usable and presentable, let's serve one of the RealWorld.io's frontend implementations on https://pyramid-openapi3.pylonsproject.org/.
 
 I chose [Elm](https://github.com/rtfeldman/elm-spa-example), since that's what I am familiar with, but it doesn't really matter. Any frontend should work since they all use the same API spec.
 
