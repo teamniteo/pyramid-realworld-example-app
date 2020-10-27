@@ -42,7 +42,13 @@ def ini_path(request: _pytest.fixtures.SubRequest) -> str:
 @pytest.fixture(scope="session")
 def app_env(ini_path: str) -> AppEnvType:
     """Initialize WSGI application from INI file given on the command line."""
-    env = bootstrap(ini_path, options={"SKIP_CHECK_DB_MIGRATED": "true"})
+    env = bootstrap(
+        ini_path,
+        options={
+            "SKIP_CHECK_DB_MIGRATED": "true",
+            "pyramid_openapi3.enable_endpoint_validation": "true",
+        },
+    )
 
     alembic_cfg = Config("etc/alembic.ini")
     command.upgrade(alembic_cfg, "head")

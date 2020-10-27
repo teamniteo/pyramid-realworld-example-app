@@ -46,3 +46,22 @@ def create(request: Request) -> SingleCommentResponse:
     )
     article.comments.append(comment)
     return {"comment": comment}
+
+
+@view_config(
+    route_name="comment.delete", renderer="json", request_method="DELETE", openapi=True
+)
+def delete(request: Request) -> None:
+    """Remove a comment."""
+    object_or_404(
+        Article.by_slug(
+            request.openapi_validated.parameters["path"]["slug"], db=request.db
+        )
+    )
+
+    comment = object_or_404(
+        Comment.by_id(request.openapi_validated.parameters["path"]["id"], db=request.db)
+    )
+
+    request.db.delete(comment)
+    return None

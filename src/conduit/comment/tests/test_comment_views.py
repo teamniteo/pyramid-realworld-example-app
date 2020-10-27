@@ -39,3 +39,14 @@ def test_POST_comment(testapp: TestApp, democontent: None) -> None:
     assert res.json["comment"]["author"]["username"] == "one"
 
     # TODO: can we mock createdAt and updatedAt and assert entire JSON output?
+
+
+def test_DELETE_comment(testapp: TestApp, democontent: None) -> None:
+    """Test DELETE /api/articles/{slug}/comment/{id}."""
+    res = testapp.delete(
+        "/api/articles/foo/comments/99",
+        headers={"Authorization": f"Token {USER_ONE_JWT}"},
+        status=200,
+    )
+
+    assert res.json is None
