@@ -16,6 +16,7 @@ from sqlalchemy import Unicode
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import backref
 from sqlalchemy.orm import relationship
+from sqlalchemy.orm.session import Session
 
 import typing as t
 
@@ -77,3 +78,12 @@ class Comment(Model):
     body = Column(Unicode, nullable=False)
     created = Column(DateTime, default=datetime.utcnow, nullable=False)
     updated = Column(DateTime, default=datetime.utcnow, nullable=False)
+
+    @classmethod
+    def by_id(
+        cls: t.Type[Comment], id: int, db: Session  # noqa: A002
+    ) -> t.Optional[Comment]:
+        """Get Comment by id."""
+        q = db.query(cls)
+        q = q.filter(cls.id == id)
+        return q.one_or_none()
