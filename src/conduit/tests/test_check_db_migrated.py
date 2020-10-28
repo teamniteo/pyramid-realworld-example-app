@@ -7,6 +7,7 @@ from pyramid_deferred_sqla import check_db_migrated
 from sqlalchemy.orm.session import Session
 from unittest import mock
 
+import os
 import pytest
 import typing as t
 
@@ -35,12 +36,13 @@ def test_database_outdated(sys: mock.MagicMock, ini_path: str, old_db: Session) 
     by one version, so the check should fail and call sys.exit
     """
     with mock.patch("pyramid_deferred_sqla.check_db_migrated") as method_under_test:
-        method_under_test.side_effect = check_db_migrated
-        assert sys.exit.call_count == 0
-        bootstrap(ini_path)
-        assert method_under_test.call_count == 1
-        assert sys.exit.call_count == 1
-        assert "I found a more recent migration" in sys.exit.call_args[0][0]
+        with mock.patch.dict(os.environ, {"CHECK_DB_MIGRATED": "True"}):
+            method_under_test.side_effect = check_db_migrated
+            assert sys.exit.call_count == 0
+            bootstrap(ini_path)
+            assert method_under_test.call_count == 1
+            assert sys.exit.call_count == 1
+            assert "I found a more recent migration" in sys.exit.call_args[0][0]
 
 
 @mock.patch("pyramid_deferred_sqla.sys")

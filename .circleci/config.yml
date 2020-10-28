@@ -176,7 +176,7 @@ jobs:
           name: Test development.ini
           command: |
             $ENTRYPOINT .docker/devdb.sh
-            $ENTRYPOINT pshell etc/development.ini SKIP_CHECK_DB_MIGRATED=1 < .circleci/exit.sh
+            CHECK_DB_MIGRATED=0 $ENTRYPOINT pshell etc/development.ini < .circleci/exit.sh
 
       - run:
           name: Checking consistency between alembic revision and conduit models
@@ -193,7 +193,7 @@ jobs:
       - run:
           name: Test production.ini
           command: |
-            /app/docker-entrypoints/run.sh env JWT_SECRET=secret DATABASE_URL=postgresql://conduit_dev@localhost/conduit_dev pshell etc/production.ini SKIP_CHECK_DB_MIGRATED=1 < .circleci/exit.sh
+            CHECK_DB_MIGRATED=0 /app/docker-entrypoints/run.sh env JWT_SECRET=secret DATABASE_URL=postgresql://conduit_dev@localhost/conduit_dev pshell etc/production.ini < .circleci/exit.sh
 
       - run:
           name: Run unit tests

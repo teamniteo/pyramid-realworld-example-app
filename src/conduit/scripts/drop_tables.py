@@ -25,9 +25,7 @@ def main(argv: t.List[str] = sys.argv) -> None:
         metavar="<config>",
         help="Pyramid application configuration file.",
     )
-    env = bootstrap(
-        parser.parse_args().config, options={"SKIP_CHECK_DB_MIGRATED": "true"}
-    )
+    env = bootstrap(parser.parse_args().config)
     setup_logging(parser.parse_args().config)
 
     engine = env["registry"].settings["sqlalchemy.engine"]
