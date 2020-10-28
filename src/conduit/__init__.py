@@ -71,10 +71,6 @@ def configure(config: Configurator) -> None:
 def main(global_config: t.Dict[str, str], **settings: str) -> Router:
     """Return a Pyramid WSGI application."""
 
-    # Support for turning off alembic DB checks in certain scripts
-    if global_config.get("SKIP_CHECK_DB_MIGRATED"):
-        settings["SKIP_CHECK_DB_MIGRATED"] = global_config["SKIP_CHECK_DB_MIGRATED"]
-
     # Expand environment variables in .ini files
     settings = expandvars_dict(settings)
 

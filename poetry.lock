@@ -1036,7 +1036,7 @@ dev = ["coverage", "pytest", "tox"]
 lint = ["black"]
 
 [package.source]
-reference = "a81ffee10a8107fd36988c96da947a6c03e160dd"
+reference = "5cbbb6c479a31d1be7758845d66fa6f0e20e06d9"
 type = "git"
 url = "https://github.com/niteoweb/pyramid_deferred_sqla.git"
 [[package]]

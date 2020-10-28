@@ -54,7 +54,7 @@ stop-pgsql: .installed
 # Drop, recreate and populate development database with demo content
 .PHONY: devdb
 devdb: .installed
-	@poetry run python -m conduit.scripts.drop_tables
+	@CHECK_DB_MIGRATED=0 poetry run python -m conduit.scripts.drop_tables
 	@poetry run alembic -c etc/alembic.ini -x ini=etc/development.ini upgrade head
 	@poetry run python -m conduit.scripts.populate
 
@@ -65,7 +65,7 @@ pshell: .installed
 # Run development server
 .PHONY: run
 run: .installed
-	@poetry run pserve etc/development.ini --reload
+	@ENABLE_ENDPOINT_VALIDATION=1 poetry run pserve etc/development.ini --reload
 
 # Testing and linting targets
 all = false
