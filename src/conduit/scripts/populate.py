@@ -31,7 +31,9 @@ ARTICLE_BAR_ID = "aaaaaaaa-bbbb-4ccc-aaaa-eeeeeeeeeee2"
 ARTICLE_JOHNJACOB_ID = "aaaaaaaa-bbbb-4ccc-aaaa-eeeeeeeeeee3"
 
 # "secret", hashed
-SECRET = "$argon2i$v=19$m=512,t=2,p=2$mRMCwLg3Rgih1JqTUooxxg$/bBw6iXly9rfryTkaoPX/Q"
+SECRET = (
+    "$argon2i$v=19$m=512,t=2,p=2$mRMCwLg3Rgih1JqTUooxxg$/bBw6iXly9rfryTkaoPX/Q"  # nosec
+)
 
 
 def add_users(db: Session) -> None:
