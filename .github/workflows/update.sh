@@ -19,5 +19,6 @@ if ! git diff-index --quiet HEAD; then
   git config user.name "Package updater"
   git commit -a -m "Package update $today"
   git push -u origin "package-update-$today"
-  hub pull-request --no-edit --assign zupo
+  gh auth login --with-token <<< $GITHUB_TOKEN
+  gh pr create -B master -H "package-update-$today" -t "Update packages" -b ""
 fi
