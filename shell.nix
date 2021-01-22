@@ -23,8 +23,13 @@ let
     micro
     tmux
     curl
+
+    # For package Update GitHub action
     niv
     poetry
+    gitAndTools.gh
+    cacert  # TODO: Remove cacert and nix. See
+    nix     # https://github.com/nmattia/niv/issues/222
   ]
 
   # The watchdog Python lib has a few extra requirements on Darwin (MacOS)
