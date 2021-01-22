@@ -1,11 +1,6 @@
 { type ? "develop" }:
 let
-  nixpkgs =
-    let cfg = builtins.fromJSON (builtins.readFile ./nixpkgs.json);
-    in fetchTarball {
-      url = "https://github.com/${cfg.owner}/${cfg.repo}/tarball/${cfg.rev}";
-      sha256 = cfg.sha256;
-    };
+  nixpkgs = (import ./nix/sources.nix).nixpkgs;
   pkgs = import nixpkgs {
     config = { allowUnfree = true; };
     overlays = [];
@@ -28,6 +23,8 @@ let
     micro
     tmux
     curl
+    niv
+    poetry
   ]
 
   # The watchdog Python lib has a few extra requirements on Darwin (MacOS)
@@ -71,23 +68,24 @@ let
   ];
 in
 
-stdenv.mkDerivation {
+pkgs.mkShell {
   name = "dev-shell";
   buildInputs = dependencies;
+  shellHook = ''
+    # Needed to be able to install Python packages from GitHub
+    export GIT_SSL_CAINFO="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
 
-  # Needed to be able to install Python packages from GitHub
-  GIT_SSL_CAINFO = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+    # Such that nixpkgs doesn't need to be downloaded again when running we make
+    # it a dependency of the derivation. Also allows using `nix-shell -p` with the
+    # correct nixpkgs version
+    export NIX_PATH="nixpkgs=${nixpkgs}:$NIX_PATH"
 
-  # Such that nixpkgs doesn't need to be downloaded again when running we make
-  # it a dependency of the derivation. Also allows using `nix-shell -p` with the
-  # correct nixpkgs version
-  NIX_PATH = "nixpkgs=${nixpkgs}";
-
-  # By default, all files from the Nix store (which have a timestamp of the
-  # UNIX epoch of January 1, 1970) are included in the .ZIP, but .ZIP archives
-  # follow the DOS convention of counting timestamps from 1980. The command
-  # `bdist_wheel` reads the SOURCE_DATE_EPOCH environment variable, which
-  # nix-shell sets to 1. Giving it a value corresponding to 1980 enables
-  # building wheels.
-  SOURCE_DATE_EPOCH = 315532800;
+    # By default, all files from the Nix store (which have a timestamp of the
+    # UNIX epoch of January 1, 1970) are included in the .ZIP, but .ZIP archives
+    # follow the DOS convention of counting timestamps from 1980. The command
+    # `bdist_wheel` reads the SOURCE_DATE_EPOCH environment variable, which
+    # nix-shell sets to 1. Giving it a value corresponding to 1980 enables
+    # building wheels.
+    export SOURCE_DATE_EPOCH=315532800
+  '';
 }
