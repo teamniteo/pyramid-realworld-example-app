@@ -6,7 +6,8 @@ WORKDIR /app
 
 # Only copy files relevant for the nix-shell in an earlier layer to
 # have this be cached when those files don't change
-COPY --chown=builder ./shell.nix ./nixpkgs.json ./
+COPY --chown=builder ./shell.nix ./
+COPY --chown=builder ./nix ./nix
 RUN nix-shell --argstr type build
 
 COPY --chown=builder . ./
