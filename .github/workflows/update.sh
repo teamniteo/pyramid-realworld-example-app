@@ -9,7 +9,7 @@ git fetch --unshallow
 niv update
 
 # Update Python packages
-poetry update
+poetry update --lock
 
 # Only continue if there are any changes
 if ! git diff-index --quiet HEAD; then
