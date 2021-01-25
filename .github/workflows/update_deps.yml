@@ -14,4 +14,4 @@ jobs:
       - uses: cachix/install-nix-action@v12
       - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: nix-shell --pure --keep GITHUB_TOKEN --run .github/workflows/update.sh
+        run: nix-shell --pure --keep GITHUB_TOKEN --run .github/scripts/update_deps.sh

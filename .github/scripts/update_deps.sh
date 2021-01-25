@@ -9,7 +9,7 @@ git fetch --unshallow
 niv update
 
 # Update Python packages
-poetry update
+poetry lock
 
 # Only continue if there are any changes
 if ! git diff-index --quiet HEAD; then
@@ -17,6 +17,7 @@ if ! git diff-index --quiet HEAD; then
   # Commit the new changes and push them to the repository so a PR can be opened
   git checkout -b "package-update-$today"
   git config user.name "Package updater"
+  git config user.email "gh-bot@niteo.co"
   git commit -a -m "Package update $today"
   git push -u origin "package-update-$today"
   gh auth login --with-token <<< $GITHUB_TOKEN
