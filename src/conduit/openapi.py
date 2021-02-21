@@ -6,11 +6,11 @@ from pyramid.httpexceptions import exception_response
 from pyramid.httpexceptions import HTTPNotFound
 from pyramid.httpexceptions import HTTPUnauthorized
 from pyramid.httpexceptions import HTTPUnprocessableEntity
-from pyramid.renderers import JSON
 from pyramid.request import Request
 from pyramid.view import exception_view_config
 from pyramid.view import forbidden_view_config
 from pyramid.view import notfound_view_config
+from pyramid.swagger import pyramid_swagger
 
 import os
 import structlog
@@ -33,7 +33,7 @@ def includeme(config: Configurator) -> None:
 
 def json_renderer() -> JSON:
     """Configure a JSON renderer that supports rendering datetimes."""
-    renderer = JSON()
+    renderer = pyramid_swagger()
     renderer.add_adapter(datetime, datetime_adapter)
     return renderer
 
