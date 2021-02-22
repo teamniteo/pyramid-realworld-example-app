@@ -67,7 +67,7 @@ let
 
   # Only these dependencies are needed to run in production
   runDeps = with pkgs; [
-    python38
+    python39
     poetry
     postgresql_12    # For interacting with the database
   ];

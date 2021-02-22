@@ -25,49 +25,49 @@
   </a>
 </p>
 
-> ### Pyramid codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
+> ### Pyramid codebase containing real world examples (CRUD, authentication, authorization, advanced patterns, and so on) that adhere to the [RealWorld](https://github.com/gothinkster/realworld) specification and API.
 
 
-### [Demo (app)](https://pyramid-openapi3.pylonsproject.org/)&nbsp;&nbsp;&nbsp;&nbsp;[Demo (api)](https://pyramid-openapi3.pylonsproject.org/api)
-
+### Demos
+- [Demo (app)](https://pyramid-realworld.herokuapp.com/)
+- [Demo (api)](https://pyramid-realworld.herokuapp.com/api)
 
 This codebase was created to demonstrate a fully fledged fullstack application built with **Pyramid** including CRUD operations, authentication, routing, pagination, and more.
 
-We've gone to great lengths to adhere to the **Pyramid** community styleguides & best practices. You are encouraged to [use it as a scaffold/template](https://github.com/niteoweb/pyramid-realworld-example-app/generate) for your next Pyramid project.
+We've gone to great lengths to adhere to the **Pyramid** community style guides and best practices. You are encouraged to [use it as a scaffold/template](https://github.com/niteoweb/pyramid-realworld-example-app/generate) for your next Pyramid project.
 
 For more information on how this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
 
 
 # How it works
 
-Pyramid using [pyramid_openapi3](https://github.com/pylons/pyramid_openapi3) for request/response validation and [pyramid_deferred_sqla](https://github.com/niteoweb/pyramid_deferred_sqla) for PostgreSQL integration. Deployed to [Heroku](https://pyramid-openapi3.pylonsproject.org/api).
+The application is built with Pyramid, using [pyramid_openapi3](https://github.com/pylons/pyramid_openapi3) for request/response validation and [pyramid_deferred_sqla](https://github.com/niteoweb/pyramid_deferred_sqla) for PostgreSQL integration. It is deployed to [Heroku](https://pyramid-realworld.herokuapp.com/api).
 
-Pyramid serves one of the [RealWorld.io frontends](https://github.com/gothinkster/realworld#frontends) (Elm) on root, so it is easier to understand how things fit together. The frontend is interchangeable, you can use any
+Pyramid serves one of the [RealWorld.io frontends](https://github.com/gothinkster/realworld#frontends) (Elm) on root, so it is easier to understand how things fit together. The frontend is interchangeable. You can use any
 RealWorld.io frontend.
 
 
 # Getting started
 
-To setup your development environment, there are some dependencies you need to install on your system.
+To set up your development environment, there are some dependencies you need to install on your system.
 You can either install them manually, or use [Nix](https://nixos.org/nix) and [direnv](https://direnv.net/)
-to install them automatically (except docker which you need to install manually).
+to install them automatically (except Docker which you need to install manually).
 
-So, first ensure that you have [Docker](https://www.docker.com) installed on your system. Then,
+First ensure that you have [Docker](https://www.docker.com) installed on your system. Then,
 
-### Option 1: Install manually
+## Option 1: Install manually
 
-- [python 3.8](https://www.python.org) (recommend using [pyenv](https://github.com/pyenv/pyenv) for installing Python).
+- [python 3.9](https://www.python.org) (we recommend using [pyenv](https://github.com/pyenv/pyenv) for installing Python).
 - [poetry](https://github.com/python-poetry/poetry)
 - [node](https://nodejs.org) & [jq](https://github.com/stedolan/jq) (to run postman tests)
 
 If you have any dependency related issue, check out `./shell.nix` for the specific version of dependencies.
 
-### Option 2: Install using Nix
+## Option 2: Install using Nix
 
 - Install the [Nix package manager](https://nixos.org/nix).
 - Install and configure [Direnv](https://direnv.net)
 - Run `direnv allow` in the project root.
-
 
 Docker should be running. Then you can run:
 
@@ -88,7 +88,7 @@ To run unit tests, mypy typing checker and flake8 linter:
 
     $ make tests
 
-To stop docker and clean container, you can run:
+To stop Docker and clean the container, you can run:
 
     $ make stop-pgsql
     $ make clean-pgsql
