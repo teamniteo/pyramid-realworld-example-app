@@ -53,21 +53,26 @@ To set up your development environment, there are some dependencies you need to 
 You can either install them manually, or use [Nix](https://nixos.org/nix) and [direnv](https://direnv.net/)
 to install them automatically (except Docker which you need to install manually).
 
-First ensure that you have [Docker](https://www.docker.com) installed on your system. Then,
+First ensure that you have [Docker](https://www.docker.com) installed on your system.
+Then choose one option to install pre-requisites.
 
-## Option 1: Install manually
+## Option 1: Install pre-requisites manually
 
 - [python 3.9](https://www.python.org) (we recommend using [pyenv](https://github.com/pyenv/pyenv) for installing Python).
 - [poetry](https://github.com/python-poetry/poetry)
 - [node](https://nodejs.org) & [jq](https://github.com/stedolan/jq) (to run postman tests)
 
+Activate the virtual environment, then continue to Install RealWorld Example App.
+
 If you have any dependency related issue, check out `./shell.nix` for the specific version of dependencies.
 
-## Option 2: Install using Nix
+## Option 2: Install pre-requisites using Nix
 
 - Install the [Nix package manager](https://nixos.org/nix).
 - Install and configure [Direnv](https://direnv.net)
 - Run `direnv allow` in the project root.
+
+## Install and Run RealWorld Example App
 
 Docker should be running. Then you can run:
 
@@ -82,7 +87,6 @@ Docker should be running. Then you can run:
 Now point your browser to:
  * http://localhost:8080/ -> Conduit frontend app using the API
  * http://localhost:8080/api -> Swagger documentation for the API
-
 
 To run unit tests, mypy typing checker and flake8 linter:
 
