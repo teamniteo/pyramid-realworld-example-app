@@ -24,12 +24,13 @@ test_suite = "conduit"
 
 [tool.poetry.dependencies]
 python = "~3.8"
+
 argon2-cffi = "*"
 gunicorn = "*"
 mypy_extensions = "*"
 passlib = "*"
 psycopg2-binary = "*"
-pyramid = "*"
+pyramid = "<2.0"
 pyramid_deferred_sqla = {git = "https://github.com/niteoweb/pyramid_deferred_sqla.git"}
 pyramid_force_https = "*"
 pyramid_heroku = "*"
@@ -39,6 +40,7 @@ pyramid_redirect = "*"
 python-slugify = "*"
 raven = "*"
 structlog = "*"
+sqlalchemy = "<1.4"
 
 [tool.poetry.dev-dependencies]
 bandit = "*"
