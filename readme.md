@@ -29,6 +29,9 @@
 
 
 ### Demos
+
+> This is deployed on Heroku and is configured to automatically sleep after an hour of inactivity. If you get Application Error, refresh again in a minute or two. 
+
 - [Demo (app)](https://pyramid-realworld.herokuapp.com/)
 - [Demo (api)](https://pyramid-realworld.herokuapp.com/api)
 
