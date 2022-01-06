@@ -3,7 +3,7 @@
 
 set -e
 
-# See https://github.com/niteoweb/pyramid-realworld-example-app/issues/86
+# See https://github.com/teamniteo/pyramid-realworld-example-app/issues/86
 echo "Installing required extensions"
 psql $DATABASE_URL -c "CREATE EXTENSION IF NOT EXISTS pgcrypto;"
 

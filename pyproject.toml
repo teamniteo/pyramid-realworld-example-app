@@ -12,7 +12,7 @@ classifiers = [
 	"Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
 	"License :: MIT",
 ]
-homepage = "http://github.com/niteoweb/pyramid-realworld-example-app"
+homepage = "http://github.com/teamniteo/pyramid-realworld-example-app"
 keywords = ["pyramid", "openapi", "realworld"]
 packages = [
 	{ include = "conduit", from = "src" },
@@ -31,7 +31,7 @@ mypy_extensions = "*"
 passlib = "*"
 psycopg2-binary = "*"
 pyramid = "<2.0"
-pyramid_deferred_sqla = {git = "https://github.com/niteoweb/pyramid_deferred_sqla.git"}
+pyramid_deferred_sqla = {git = "https://github.com/teamniteo/pyramid_deferred_sqla.git"}
 pyramid_force_https = "*"
 pyramid_heroku = "*"
 pyramid_jwt = "*"

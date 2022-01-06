@@ -1029,7 +1029,7 @@ lint = ["black"]
 
 [package.source]
 type = "git"
-url = "https://github.com/niteoweb/pyramid_deferred_sqla.git"
+url = "https://github.com/teamniteo/pyramid_deferred_sqla.git"
 reference = "master"
 resolved_reference = "79d9eb2f2bf44a476cdfc26777df56e9be92e36b"
 
