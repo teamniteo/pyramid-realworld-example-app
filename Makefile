@@ -1,5 +1,5 @@
 # Convenience makefile to build the dev env and run common commands
-# Based on https://github.com/niteoweb/Makefile
+# Based on https://github.com/teamniteo/Makefile
 
 .PHONY: all
 all: .installed
